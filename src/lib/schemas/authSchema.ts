@@ -3,7 +3,7 @@
 import { z } from "zod"
 
 export const signInSchema = z.object({
-  email: z.string().email({ message: "Email inválido" }),
+  email: z.email({ message: "Email inválido" }),
   password: z
     .string()
     .min(6, { message: "Senha deve ter pelo menos 6 caracteres" }),
@@ -14,7 +14,7 @@ export const signUpSchema = z
       .string()
       .min(2, { message: "Nome deve ter pelo menos 2 caracteres" })
       .max(80, { message: "Nome deve ter no máximo 80 caracteres" }),
-    email: z.string().email({ message: "Email inválido" }),
+    email: z.email({ message: "Email inválido" }),
     password: z
       .string()
       .min(6, { message: "Senha obrigatória" })
