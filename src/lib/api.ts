@@ -44,6 +44,7 @@ export const api = async <TypeResponse>({
 
   try {
     const response = await instance.request<TypeResponse>({
+      url: endpoint,
       method,
       params: method === "GET" && data,
       data: method !== "GET" && data,
