@@ -8,6 +8,7 @@ import {
   APIDeleteMessage,
   APIGetMessages,
 } from "@/types/Message"
+import { Auth } from "@/types/Auth"
 
 export const signIn = async (data: SignInSchema) => {
   return await api<SignInSchema>({
@@ -24,6 +25,14 @@ export const signUp = async (data: SignUpSchema) => {
     method: "POST",
     data,
     withAuth: false,
+  })
+}
+
+export const signOut = async () => {
+  return await api<Auth>({
+    endpoint: "accounts/signout",
+    method: "POST",
+    withAuth: true,
   })
 }
 
