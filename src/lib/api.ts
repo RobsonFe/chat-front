@@ -26,7 +26,7 @@ export const api = async <TypeResponse>({
 
   if (withAuth) {
     const sessionAuth = (await cookies()).get(
-      process.env.NEXT_PUBLIC_API_BASE_URL as string
+      process.env.NEXT_PUBLIC_AUTH_ACCESS_TOKEN || "access_token"
     )
 
     if (sessionAuth?.value) {

@@ -11,7 +11,7 @@ import {
 import { Auth } from "@/types/Auth"
 
 export const signIn = async (data: SignInSchema) => {
-  return await api<SignInSchema>({
+  return await api<Auth>({
     endpoint: "accounts/signin",
     method: "POST",
     data,
