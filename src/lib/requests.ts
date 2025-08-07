@@ -28,10 +28,11 @@ export const signUp = async (data: SignUpSchema) => {
   })
 }
 
-export const signOut = async () => {
+export const signOut = async (refreshToken: string) => {
   return await api<Auth>({
     endpoint: "accounts/signout",
     method: "POST",
+    data: { refresh: refreshToken },
     withAuth: true,
   })
 }
