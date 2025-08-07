@@ -3,6 +3,7 @@
 import { SignInSchema, SignUpSchema } from "@/lib/schemas/authSchema"
 import { signIn, signUp, signOut } from "@/lib/requests"
 import { cookies } from "next/headers"
+import { User } from "@/types/User"
 
 export const handleSignIn = async (data: SignInSchema) => {
   const response = await signIn(data)
@@ -21,7 +22,7 @@ export const handleSignIn = async (data: SignInSchema) => {
       name: process.env.NEXT_PUBLIC_AUTH_REFRESH_TOKEN || "refresh_token",
       value: response.refresh,
       httpOnly: true,
-      maxAge: 604800, // 7 dia
+      maxAge: 604800, // 7 dias
     })
   }
   return response
@@ -44,7 +45,7 @@ export const handleSignUp = async (data: SignUpSchema) => {
       name: process.env.NEXT_PUBLIC_AUTH_REFRESH_TOKEN || "refresh_token",
       value: response.refresh,
       httpOnly: true,
-      maxAge: 604800, // 7 dia
+      maxAge: 604800, // 7 dias
     })
   }
   return response
@@ -53,7 +54,6 @@ export const handleSignUp = async (data: SignUpSchema) => {
 export const handleSignOut = async () => {
   const cookieStore = await cookies()
 
-  // Recupera o refresh token do cookie
   const refreshTokenCookie = cookieStore.get(
     process.env.NEXT_PUBLIC_AUTH_REFRESH_TOKEN || "refresh_token"
   )
@@ -74,4 +74,28 @@ export const handleSignOut = async () => {
   )
 
   return { success: true }
+}
+
+export const handleGetUser = async (): Promise<User | null> => {
+  const authCookie = (await cookies()).get(
+    process.env.NEXT_PUBLIC_AUTH_ACCESS_TOKEN || "access_token"
+  )?.value
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/accounts/user`,
+    {
+      headers: {
+        Authorization: `Bearer ${authCookie}`,
+        "Content-Type": "application/json",
+      },
+    }
+  )
+
+  const jsonResponse = await response.json()
+
+  const user = jsonResponse.user
+
+  if (user) return user as User
+
+  return null
 }
