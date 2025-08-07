@@ -20,7 +20,7 @@ export const signIn = async (data: SignInSchema) => {
 }
 
 export const signUp = async (data: SignUpSchema) => {
-  return await api<SignUpSchema>({
+  return await api<Auth>({
     endpoint: "accounts/signup",
     method: "POST",
     data,
