@@ -17,5 +17,9 @@ export const Header = () => {
     toast.success("Usuário Deslogado com sucesso", { position: "top-right" })
   }
 
-  return <header className="h-header"></header>
+  return (
+    <header className="h-header px-2 bg-slate-100 dark:bg-slate-900 border-b border-slate-50 dark:border-b-slate-800">
+      <nav></nav>
+    </header>
+  )
 }

@@ -41,6 +41,10 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Configurações de altura customizadas para o Header */
+  --height-header: var(--header-height);
+  --height-app: var(--app-height);
 }
 
 :root {
