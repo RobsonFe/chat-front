@@ -19,7 +19,7 @@ export const Header = () => {
 
   return (
     <header className="h-header px-2 bg-slate-100 dark:bg-slate-900 border-b border-slate-50 dark:border-b-slate-800">
-      <nav></nav>
+      <nav className="flex items-center justify-center h-full max-w-7x1 mx-auto"></nav>
     </header>
   )
 }
