@@ -3,7 +3,7 @@ export type User = {
   avatar: string
   name: string
   email: string
-  last_acess: string
+  last_access: string
 }
 
 export type UserUpdate = {

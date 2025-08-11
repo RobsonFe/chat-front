@@ -9,6 +9,8 @@ import { NewChat } from "./NewChat"
 import { Input } from "@/components/ui/input"
 import { Plus, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import dayjs from "dayjs"
 
 type Props = {
   variant?: "mobile" | "desktop"
@@ -103,6 +105,41 @@ export const LeftSide = ({ variant = "desktop" }: Props) => {
           <Plus className="size-5" />
           <span className="text-sm">Nova Conversa</span>
         </Button>
+      </div>
+      <div className="mt-5">
+        {chatFiltered.map((chat) => (
+          <div
+            key={chat.id}
+            className={`flex items-center gap-4 py-4 px-3 ${
+              chat.id === currentChat?.id
+                ? "bg-slate-200 dark:bg-slate-800"
+                : ""
+            } hover:bg-slate-200 dark:bg-slate-700 cursor-pointer transition-colors duration-200`}
+            onClick={() => setChat(chat)}
+          >
+            <Avatar
+              className="size-[46px]"
+              isOnline={dayjs()
+                .subtract(5, "minute")
+                .isBefore(chat.user.last_access)}
+            >
+              <AvatarImage src={chat.user.avatar} alt={chat.user.name} />
+              <AvatarFallback>{chat.user.name.slice(0, 2)}</AvatarFallback>
+            </Avatar>
+            <div className="space-y-1 flex-1 truncate">
+              <div className="flex items-center justify-between gap-4">
+                <div className="font-bold text-slate-800 dark:text-slate-100 truncate text-ellipsis">
+                  {chat.user.name}
+                </div>
+                <div className="text-sm font-semibold text-gray-500 dark:text-gray-400">
+                  {dayjs(chat.viewed_at || chat.created_at).format(
+                    "DD/MM/YYYY HH:mm"
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )
