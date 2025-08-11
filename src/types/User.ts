@@ -7,5 +7,5 @@ export type User = {
 }
 
 export type UserUpdate = {
-  user: User
+  result: User
 }

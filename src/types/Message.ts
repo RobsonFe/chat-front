@@ -11,11 +11,11 @@ export type Message = {
 }
 
 export type APIGetMessages = {
-  messages: Message[]
+  results: Message[]
 }
 
 export type APICreateMessage = {
-  message: Message
+  result: Message
 }
 
 export type APIDeleteMessage = {

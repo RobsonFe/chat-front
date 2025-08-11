@@ -11,11 +11,11 @@ export type Chat = {
 }
 
 export type APIGetChats = {
-  chats: Chat[]
+  results: Chat[]
 }
 
 export type APICreateChat = {
-  chat: Chat
+  result: Chat
 }
 export type APIDeleteChat = {
   success?: boolean

@@ -29,7 +29,7 @@ export const Header = () => {
     handleSignOut()
     setChat(null)
     clearUser()
-    toast.success("Deslogado com sucesso!", { position: "top-center" })
+    toast.success("Deslogado com sucesso!", { position: "top-right" })
   }
 
   return (
