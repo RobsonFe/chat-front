@@ -7,7 +7,7 @@ import { toast } from "sonner"
 import { socket } from "../Providers"
 import { NewChat } from "./NewChat"
 import { Input } from "@/components/ui/input"
-import { Plus, Search } from "lucide-react"
+import { FileText, Mic, Plus, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import dayjs from "dayjs"
@@ -114,18 +114,19 @@ export const LeftSide = ({ variant = "desktop" }: Props) => {
               chat.id === currentChat?.id
                 ? "bg-slate-200 dark:bg-slate-800"
                 : ""
-            } hover:bg-slate-200 dark:bg-slate-700 cursor-pointer transition-colors duration-200`}
+            } hover:bg-slate-200 hover:dark:bg-slate-700 cursor-pointer transition`}
             onClick={() => setChat(chat)}
           >
             <Avatar
               className="size-[46px]"
               isOnline={dayjs()
-                .subtract(5, "minute")
-                .isBefore(chat.user.last_access)}
+                .subtract(5, "minutes")
+                .isBefore(dayjs(chat.user.last_access))}
             >
               <AvatarImage src={chat.user.avatar} alt={chat.user.name} />
               <AvatarFallback>{chat.user.name.slice(0, 2)}</AvatarFallback>
             </Avatar>
+
             <div className="space-y-1 flex-1 truncate">
               <div className="flex items-center justify-between gap-4">
                 <div className="font-bold text-slate-800 dark:text-slate-100 truncate text-ellipsis">
@@ -133,10 +134,36 @@ export const LeftSide = ({ variant = "desktop" }: Props) => {
                 </div>
                 <div className="text-sm font-semibold text-gray-500 dark:text-gray-400">
                   {dayjs(chat.viewed_at || chat.created_at).format(
-                    "DD/MM/YYYY HH:mm"
+                    "DD/MM/YYYY"
                   )}
                 </div>
               </div>
+
+              {chat.last_message ? (
+                <div className="flex items-center justify-between gap-4">
+                  <div className="text-sm font-semibold text-slate-800 dark:text-slate-300 truncate text-ellipsis">
+                    {chat.last_message.body ? (
+                      chat.last_message.body
+                    ) : chat.last_message.attachment?.audio ? (
+                      <div className="flex items-center gap-1">
+                        <Mic className="size-4 mb-0.5" strokeWidth={2} />
+                        Mensagem de voz
+                      </div>
+                    ) : chat.last_message.attachment?.file ? (
+                      <div className="flex items-center gap-1">
+                        <FileText className="size-4 mb-0.5" strokeWidth={2} />
+                        Arquivo
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-sm font-semibold text-slate-800 dark:text-slate-300 truncate text-ellipsis">
+                  Clique para enviar uma mensagem
+                </div>
+              )}
             </div>
           </div>
         ))}
