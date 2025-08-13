@@ -9,7 +9,7 @@ import LogoLight from "@/assets/logo-light.svg"
 import LogoDark from "@/assets/logo-dark.svg"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Home, Sun, Moon, Menu, ChevronDown, User, LogOut } from "lucide-react"
+import { Home, Menu, ChevronDown, User, LogOut } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
