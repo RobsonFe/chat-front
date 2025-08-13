@@ -5,7 +5,8 @@ import { useTheme } from "next-themes"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { toast } from "sonner"
-import Logo from "@/assets/logo.svg"
+import LogoLight from "@/assets/logo-light.svg"
+import LogoDark from "@/assets/logo-dark.svg"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Home, Sun, Moon, Menu, ChevronDown, User, LogOut } from "lucide-react"
@@ -19,7 +20,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export const Header = () => {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const { user, clearUser } = useAuthStore()
   const { setChat, showChatsList, setShowChatsList } = useChatStore()
 
@@ -37,7 +38,12 @@ export const Header = () => {
       <nav className="flex items-center justify-between h-full max-w-7xl mx-auto">
         <div className="hidden min-[480px]:block">
           <Link href="/">
-            <Image src={Logo} alt="Logo" width={170} priority />
+            <Image
+              src={theme === "dark" ? LogoDark : LogoLight}
+              alt="Logo"
+              width={170}
+              priority
+            />
           </Link>
         </div>
 
@@ -64,7 +70,11 @@ export const Header = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
+              <Button
+                variant="outline"
+                size="icon"
+                className="cursor-pointer text-slate-950 dark:text-slate-200"
+              >
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 <span className="sr-only">Alterar o tema</span>
@@ -76,9 +86,6 @@ export const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setTheme("dark")}>
                 Dark
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setTheme("system")}>
-                Sistema
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

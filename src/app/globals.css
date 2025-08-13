@@ -83,7 +83,7 @@
 
   /* Variaveis do Layout */
   --header-height: 4rem;
-  --app-height: calc(100vh - var(var(--header-height)));
+  --app-height: calc(100vh - var(--header-height));
 
 }
 
