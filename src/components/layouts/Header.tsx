@@ -18,9 +18,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { AnimatedThemeToggler } from "../magicui/animated-theme-toggler"
 
 export const Header = () => {
-  const { theme, setTheme } = useTheme()
+  const { theme } = useTheme()
   const { user, clearUser } = useAuthStore()
   const { setChat, showChatsList, setShowChatsList } = useChatStore()
 
@@ -67,35 +68,7 @@ export const Header = () => {
             <Menu className="size-[1.2rem]" />
             <span className="sr-only">Abrir/Fechar as conversas</span>
           </Button>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="cursor-pointer text-slate-950 dark:text-slate-200"
-              >
-                <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                <span className="sr-only">Alterar o tema</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem
-                onClick={() => setTheme("light")}
-                className="cursor-pointer"
-              >
-                Light
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setTheme("dark")}
-                className="cursor-pointer"
-              >
-                Dark
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
+          <AnimatedThemeToggler className="cursor-pointer text-slate-950 dark:text-slate-200" />
           {user && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

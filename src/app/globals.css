@@ -41,7 +41,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  
+
   /* Configurações de altura customizadas para o Header */
   --height-header: var(--header-height);
   --height-app: var(--app-height);
@@ -143,4 +143,8 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }
